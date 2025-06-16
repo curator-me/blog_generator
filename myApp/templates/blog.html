@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- Blog Header -->
+            <div class="text-center mb-4">
+                <h3 class="display-6 fw-bold">{{ blog.title }}</h3>
+                <div class="d-flex justify-content-center align-items-center gap-3 mb-3 text-muted small">
+                    <span>
+                        <i class="bi bi-person"></i> {{ blog.author.username }}
+                    </span>
+                    <span>
+                        <i class="bi bi-calendar"></i> {{ blog.created_at|date:"F j, Y" }}
+                    </span>
+                </div>
+                {% if blog.url_link %}
+                <a href="{{ blog.url_link }}" target="_blank" class="btn btn-outline-primary mb-4 shadow-sm">
+                    <i class="bi bi-link-45deg"></i> {{ blog.url_title|default:"Read more" }}
+                </a>
+                {% endif %}
+            </div>
+
+            <!-- Blog Content -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <div class="blog-content">
+                        {{ blog.blog|linebreaks }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'saved_blog' user.id %}" class="btn btn-secondary shadow-sm">
+                    <i class="bi bi-arrow-left"></i> Back to Blogs
+                </a>
+                {% if request.user == blog.author %}
+                <div class="btn-group">
+                    <a href="#" class="btn btn-warning shadow-sm">
+                        <i class="bi bi-pencil"></i> 
+                    </a>
+                    <a href="{% url 'delete_blog' blog.id %}" class="btn btn-danger shadow-sm">
+                        <i class="bi bi-trash"></i> 
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+<style>
+    .blog-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #343a40; /* dark gray text */
+    }
+    .blog-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+</style>
+{% endblock  %}

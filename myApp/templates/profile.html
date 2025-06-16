@@ -1,0 +1,157 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .inf-content {
+    border: 1px solid #dddddd;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+  }
+</style>
+<div class="container">
+  <div class="card border-0 shadow-sm mt-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <img
+            alt="Profile Image"
+            style="width: 200px; height: 200px; object-fit: cover"
+            class="rounded-circle img-thumbnail mb-3"
+            src="https://bootdey.com/img/Content/avatar/avatar7.png"
+          />
+          <!-- Star Ratings with Bootstrap Icons -->
+          <div class="ratings mb-3">
+            {% for i in "12345" %}
+            <a href="#" class="text-warning"><i class="bi bi-star-fill"></i></a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Information Column -->
+        <div class="col-md-8">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4>User Information</h4>
+            <!-- Edit Profile Button (Optional) -->
+            <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-pencil"></i> Edit Profile
+            </a>
+            <a href="{% url 'change_password' %}" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-pencil"></i> Change Password
+            </a>
+          </div>
+
+          <!-- Bio Section - Added Here -->
+          <div class="card bg-light mb-4">
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-file-text"></i> About</h5>
+              <p class="card-text">
+                {% if profile.bio %} {{ profile.bio }} {% else %}
+                <span class="text-muted">No bio provided yet</span>
+                {% endif %}
+              </p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td width="30%">
+                    <strong>
+                      <i class="bi bi-asterisk text-primary me-2"></i>
+                      ID
+                    </strong>
+                  </td>
+                  <td class="text-primary">#{{ profile.id }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-person text-primary me-2"></i>
+                      First Name
+                    </strong>
+                  </td>
+                  <td class="text-primary">{{ profile.first_name|default:"Not Provided"  }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-person-badge text-primary me-2"></i>
+                      Last Name
+                    </strong>
+                  </td>
+                  <td class="text-primary">{{ profile.last_name|default:"Not Provided" }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-person-circle text-primary me-2"></i>
+                      Username
+                    </strong>
+                  </td>
+                  <td class="text-primary">{{ profile.username|default:"Not Provided" }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-shield-lock text-primary me-2"></i>
+                      Role
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {% if profile.is_superuser %}
+                    <span class="badge bg-danger">Admin</span>
+                    {% else %}
+                    <span class="badge bg-primary">User</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-envelope text-primary me-2"></i>
+                      Email
+                    </strong>
+                  </td>
+                  <td class="text-primary">{{ profile.email|default:"Not Provided" }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-telephone text-primary me-2"></i>
+                      Phone
+                    </strong>
+                  </td>
+                  <td class="text-primary">{{ profile.phone|default:"Not Provided" }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-calendar-plus text-primary me-2"></i>
+                      Joined
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ profile.date_joined|date:"d M Y" }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <i class="bi bi-clock-history text-primary me-2"></i>
+                      Last Login
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{ profile.last_login|date:"d M Y H:i"|default:"Never" }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+/> {% endblock content %}

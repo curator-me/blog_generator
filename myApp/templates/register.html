@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% block content %}
+<div class="card mx-auto mt-5" style="max-width: 500px">
+  <div class="card-header text-center">Register</div>
+  <div class="card-body">
+    <form method="POST" action="{% url 'register_user' %}">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password1"
+          name="password1"
+          required
+        />
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label for="password2" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password2"
+          name="password2"
+          required
+        />
+      </div>
+
+      <!-- Submit -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Register</button>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer text-muted text-center">
+    Already have an account? <a href="{% url 'login_user' %}">Login</a>
+  </div>
+</div>
+
+{% endblock %}
