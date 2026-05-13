@@ -113,7 +113,7 @@ def generate_blog_from_text(text):  # used groq api
             wrap each para with <p> </p>"
             
     # api_key = os.getenv("MY_KEY")
-    client = Groq(api_key="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")
+    client = Groq(api_key=api_key)
 
     chat_completion = client.chat.completions.create(
         messages=[
